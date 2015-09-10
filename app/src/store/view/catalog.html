@@ -1,0 +1,37 @@
+<!-- Responsive catalog. Tabbed view in widescreen, sidenav for selection on phone.  -->
+
+<div flex layout="column" ng-controller="CatalogController as catalog">
+  <md-toolbar layout="row" class="md-whiteframe-z2">
+    <!-- Hide sidebar button on phone. -->
+    <md-button hide-gt-md class="md-icon-button" ng-click="catalog.toggleCategoryList()" aria-label="Show Category List">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+
+    <span flex></span>
+
+    <md-button class="md-icon-button" ng-click="catalog.openCart($event)" aria-label="Show Shopping Cart">
+      <md-icon md-svg-icon="shopping_cart"></md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button"  ng-click="catalog.toggleMenu($event)" aria-label="More Actions">
+      <md-icon md-svg-icon="more_vert"></md-icon>
+    </md-button>
+  </md-toolbar>
+
+  <!-- Show tabs on tablet or larger. -->
+  <md-content>
+    <md-tabs hide-sm hide-md class="md-whiteframe-z2">
+      <md-tab ng-repeat="tab in catalog.categories"
+              ng-disabled="tab.disabled"
+              label="{{tab.title}}">
+        Content for {{tab.title}}
+      </md-tab>
+    </md-tabs>
+  </md-content>
+
+  <!-- Just show the title on mobile. -->
+  <md-subheader>
+    {{catalog.selected}}
+  </md-subheader>
+
+</div>
