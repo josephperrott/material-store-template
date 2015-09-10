@@ -10,8 +10,7 @@ function CatalogController( $mdSidenav, $log ) {
 
   var self = this;
 
-  self.selected     = null;
-  self.categories   = [ 
+  self.categories = [ 
     { title: 'Feature'},
     { title: 'Latest'},
     { title: 'Fashion'},
@@ -21,7 +20,9 @@ function CatalogController( $mdSidenav, $log ) {
     { title: 'Travel'},
     { title: 'Kids'}
   ];
-  self.toggleMenu   = toggleMenu;
+  self.selected = self.categories[0];
+  self.toggleMenu = toggleMenu;
+  self.selectCategory = selectCategory;
 
   // *********************************
   // Internal methods
@@ -43,12 +44,12 @@ function CatalogController( $mdSidenav, $log ) {
     $log.debug( "selectCategory( {title} ) ", category);
 
     self.selected = angular.isNumber(user) ? $scope.users[user] : user;
-    self.toggleList();
+    self.toggleMenu();
   }
 }
 
 export default [
-    '$mdSidenav', '$log', '$log',
-    CatalogController
-  ];
+  '$mdSidenav', '$log', '$log',
+  CatalogController
+];
 

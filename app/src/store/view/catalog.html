@@ -3,7 +3,7 @@
 <div flex layout="column" ng-controller="CatalogController as catalog">
   <md-toolbar layout="row" class="md-whiteframe-z2">
     <!-- Hide sidebar button on phone. -->
-    <md-button hide-gt-md class="md-icon-button" ng-click="catalog.toggleCategoryList()" aria-label="Show Category List">
+    <md-button hide-gt-sm class="md-icon-button" ng-click="catalog.toggleMenu()" aria-label="Show Category List">
       <md-icon md-svg-icon="menu"></md-icon>
     </md-button>
 
@@ -13,14 +13,13 @@
       <md-icon md-svg-icon="shopping_cart"></md-icon>
     </md-button>
 
-    <md-button class="md-icon-button"  ng-click="catalog.toggleMenu($event)" aria-label="More Actions">
+    <md-button class="md-icon-button"  ng-click="catalog.ExtraActionMenu($event)" aria-label="More Actions">
       <md-icon md-svg-icon="more_vert"></md-icon>
     </md-button>
   </md-toolbar>
 
-  <!-- Show tabs on tablet or larger. -->
   <md-content>
-    <md-tabs hide-sm hide-md class="md-whiteframe-z2">
+    <md-tabs hide-sm class="md-whiteframe-z2">
       <md-tab ng-repeat="tab in catalog.categories"
               ng-disabled="tab.disabled"
               label="{{tab.title}}">
@@ -31,7 +30,11 @@
 
   <!-- Just show the title on mobile. -->
   <md-subheader>
-    {{catalog.selected}}
+    {{catalog.selected.title}}
   </md-subheader>
+
+  <md-sidenav md-component-id="left" class="md-sidenav-left">
+    <div ng-repeat="tab in catalog.categories">{{tab.title}}</div>
+  </md-sidenav>
 
 </div>
