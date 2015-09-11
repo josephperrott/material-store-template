@@ -7,8 +7,6 @@
       <md-icon md-svg-icon="menu"></md-icon>
     </md-button>
 
-    <span flex></span>
-
     <md-button class="md-icon-button" ng-click="catalog.openCart($event)" aria-label="Show Shopping Cart">
       <md-icon md-svg-icon="shopping_cart"></md-icon>
     </md-button>
@@ -19,7 +17,7 @@
   </md-toolbar>
 
   <md-content>
-    <md-tabs hide-sm class="md-whiteframe-z2">
+    <md-tabs hide-sm class="md-whiteframe-z2" md-selected="catalog.selected">
       <md-tab ng-repeat="tab in catalog.categories"
               ng-disabled="tab.disabled"
               label="{{tab.title}}">
@@ -27,6 +25,24 @@
       </md-tab>
     </md-tabs>
   </md-content>
+
+  <!-- Just show the title on mobile. -->
+  <md-subheader hide-gt-sm>
+      {{catalog.getSelectedCategory().title}}
+  </md-subheader>
+
+  <md-sidenav hide-gt-sm layout="column" 
+              md-component-id="nav-panel">
+    <md-toolbar></md-toolbar>
+    <md-content>
+      <md-list>
+        <md-list-item ng-repeat="(idx, category) in catalog.categories"
+                      ng-click="catalog.selectCategory($index)"
+                      ng-class="catalog.selected==$index ? 'selected' : ''">
+          <p>{{category.title}}</p>
+        </md-list-item> 
+      </md-list>
+    </md-content>
 
   <!-- Just show the title on mobile. -->
   <md-subheader>

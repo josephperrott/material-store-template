@@ -7,14 +7,12 @@
 class CatalogController {
 
   constructor($mdSidenav, $log) {
-    $log = $log.getInstance("CatalogController");
-    $log.debug("instanceOf()");
-    $log.debug($mdSidenav);
-    $log.debug($log);
+    this.$log = $log;
+    this.$mdSidenav = $mdSidenav;
 
-    var self = this;
+    this.selected = 0;
+    this.categories = [
 
-    self.categories = [
       { title: 'Feature'},
       { title: 'Latest'},
       { title: 'Fashion'},
@@ -30,6 +28,16 @@ class CatalogController {
    * Hide or Show the category menu.
    */
   toggleMenu($event) {
+    this.$log.debug( "toggleMenu() ");
+    this.$mdSidenav('nav-panel').toggle();
+  }
+
+  /**
+   * Get the currently selected Category
+   * @return a category
+   */
+  getSelectedCategory() {
+    return this.categories[this.selected];
     $log.debug( "toggleMenu() ");
     $mdSidenav('left').toggle();
   }
@@ -38,11 +46,10 @@ class CatalogController {
    * Select a category.
    * @param category
    */
-  selectCategory ( category ) {
-    $log.debug( "selectCategory( {title} ) ", category);
-
-    self.selected = angular.isNumber(user) ? $scope.users[user] : user;
-    self.toggleMenu();
+  selectCategory ( categoryIdx ) {
+    this.$log.debug( "selectCategory( {title} ) ", categoryIdx);
+    this.selected = categoryIdx;
+    this.toggleMenu();
   }
 }
 
